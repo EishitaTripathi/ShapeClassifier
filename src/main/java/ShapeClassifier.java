@@ -98,10 +98,10 @@ public class ShapeClassifier {
 				isSizeGuessCorrect = false;
 			}
 
-			if ( 0 == (calcValue % 2) && evenOddGuess.equals("Yes ")) {
+			if ( 0 == (calcValue % 2) && evenOddGuess.trim().equals("Yes")) {
 				isEvenOddCorrect = true;
 			}
-			else if ( 0 != (calcValue % 2) && evenOddGuess.equals("No")) {
+			else if ( 0 != (calcValue % 2) && evenOddGuess.trim().equals("No")) {
 				isEvenOddCorrect = true;
 			}
 			else { 
@@ -114,7 +114,7 @@ public class ShapeClassifier {
 			}
 			else if (isShapeGuessCorrect) {
 				badGuesses=0;		
-				String ans= "Yes: ";
+				String ans= "Yes";
 				boolean need_comma=false;
 
 				if (isSizeGuessCorrect) {
@@ -132,7 +132,9 @@ public class ShapeClassifier {
 			}
 			else {
 				// too many bad guesses
-				badGuesses++;
+				if (!isShapeGuessCorrect && !isSizeGuessCorrect && !isEvenOddCorrect) {
+					badGuesses++;
+				}
 				if (badGuesses >= 3) {
 					System.out.println("ERROR: Bad guess limit Exceeded");
 					System.exit(1);
